@@ -25,8 +25,7 @@ Script ini dirancang untuk melakukan pencarian file `.txt` pada direktori sumber
 ## 5. Bukti job control
 ./script/backup_loop.sh &
 jobs -l
-fg
-# Tekan Ctrl+Z
+fg (Tekan Ctrl+Z)
 bg
 ps x
 kill <PID>
