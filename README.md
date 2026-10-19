@@ -23,6 +23,7 @@ Script ini dirancang untuk melakukan pencarian file `.txt` pada direktori sumber
 - **Rotasi arsip:** Menyimpan 5 arsip terbaru dan menghapus terbaru dan menghapus arsip lama secara otomatis.
 
 ## 5. Bukti job control
+```bash
 ./script/backup_loop.sh &
 jobs -l
 fg (Tekan Ctrl+Z)
