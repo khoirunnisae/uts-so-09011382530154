@@ -30,6 +30,7 @@ fg (Tekan Ctrl+Z)
 bg
 ps x
 kill <PID>
+```
 
 ## 6. Kendala
 
