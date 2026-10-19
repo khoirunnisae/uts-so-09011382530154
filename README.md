@@ -1,32 +1,50 @@
-cat << 'EOF' > README.md
 # Tugas Besar UTS Sistem Oprasi
 
 ## 1. Identitas
-* **Nama:** Khoirun Nisa
-* **NIM:** 09011382530154
-* **Kelas:** SKU3B
+- **Nama:** Khoirun Nisa
+- **NIM:** 09011382530154
+- **Kelas:** SKU3B
 
 ## 2. Deskripsi
-Script ini berfungsi untuk melakukan pencarian file `.txt` secara otomatis pada direktori sumber `~/data_0901138253015`, mengarsipkannya dalam format`.tar.gz`, dan mencatat riwayat eksekusi ke file log `~/backup_09011382530154/backup.log`[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span).
+Proyek ini berisi tiga shell script untuk membackup file catatan praktikum.
 
-## 3. Cara menjelaskan
-* Menjalankan backup utama: `./script/backup.sh`[span_2](start_span)[span_2](end_span)
-* Menjalankan backup berulang: `./script/backup_loop.sh`[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)
-* Menjalankan alias: `source script/alias.sh`lalu ketik `bk154`[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_spam)
+- `script/backup.sh` mencari semua file `.txt` (termasuk subdiraktori) di `~/data_09011382530154` memakai `find`, lalu mengarsipkan dan mengompresinya dengan `tar -czvf` menjadi `backup_09011382530154_TANGGAL_JAM.tar.gz` di `~/backup_09011382530154`, Isi arsip diperiksa dengan `tar -tzvf` tanpa mengekstrak. Setiap backup menambah satu baris ke `~/backup_09011382530154/backup.log` dengan format `tanggal jam | nama arsip | jumlah file | ukuran arsip`.
+- `script/backup.loop.sh` menjalankan `backup.sh` berulang dengan `while true` dan `sleep $INTERVAL` (bawaan  60 detik), sehingga bisa berjalan di background dan dikendalikan dengan job control.
+- `script/alias.sh` mendefinisikan alias `bk154` untuk menjalankan `backup.sh`.
 
 ## 3. Cara Menjalankan
-* Menjalankan backup utama: `./script/backup.sh`
-* Menjalankan backup berulang: `./script/backup_loop.sh`
-* Menjalankan alias: `source script/alias.sh` lalu ketik `bk154`
 
-## 4. Bukti Job Control
+```bash
+cd ~/uts-so-09011382530154
+
+# Backup satu kali
+./script/backup.sh
+
+# Backup berulang di background
+./script/backup_loop.sh &
+
+# Hentikan loop
+kill %1
+
+# Pasang alias lalu pakai
+source script/alias.sh
+bk154
+...
+
+## 4. Fitur pengembangan
+Fitur yang dipilih: ISI_FITUR_ANDA
+Cara membaca: ISI_CARA_MENCOBA
+
+## 5. Bukti job control
+
 ```text
-$ ./script/backup_loop.sh &
-[1] 12345
-$ jobs -l
-[1]+ Ruuning			./script/backup_loop.sh &
-$ fg %1
-$ Ctrl+Z
-[1]+ Stopped			./script/backup_loop.sh
-$ bg %1
-$ kill 12345
+TEMPEL keluaran asli: ./script/backup_loop.sh &
+TEMPEL keluaran asli: jobs -1
+TEMPEL keluaran asli: fg (lalu Ctrl+Z)
+TEMPEL keluaran asli: bg
+TEMPEL keluaran asli: ps x
+TEMPEL keluaran asli: kill %1
+
+## 6. Kendala
+
+- **Kendala 1:** (error yang benar-benar muncul) - **Solusi:** (cara Anda mengatasinya)
