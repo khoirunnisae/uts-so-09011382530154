@@ -36,3 +36,10 @@ FILE_SIZE=$(du -h "$ARCHIVE_PATH" | cut -f1)
 
 # 5. Catat log ke fila log (satu baris)
 echo "$LOG_TIME | $ARCHIVE_NAME | $TOTAL_FILES file | $FILE_SIZE" >> "$LOG_FILE"
+
+# Hapus file sementara
+rm -f "$TEMP_LIST"
+
+# 6. Fitur Pengembangan: Rotasi Arsip (Menyimpan 5 arsip terbaru saja)
+cd "$BACKUP_DIR" || exit
+ls -t backup_09011382530154_*.tar.gz 2>/dev/null | tail -n +6 |xargs -r rm --
