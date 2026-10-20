@@ -3,19 +3,10 @@
 # NIM: 09011382530154
 # Kelas: SKU3B
 
-# path ke script backup utama
-SCRIPT_PATH="./script/backup.sh"
+INTERVAL=60
 
-# Loop sebanyak 3 kali
-for i in {1..3}
-do
-	echo "Menjalankan backup ke-$i.."
-	bash "$SCRIPT_PATH"
-
-	# Beri jeda 3 detik antar eksekusi (kecuali pada eksekusi trakhir)
-	if [ $i -lt 3 ]; then
-		sleep 3
-	fi
+# Perulangan terus menerus di background
+while true; do
+	bash "$(dirname "$0")/backup.sh"
+	sleep "$INTERVAL"
 done
-
-echo "Semua peroses backup loop selesai!"
